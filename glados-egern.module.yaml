@@ -1,0 +1,31 @@
+name: "GLaDOS 自动签到"
+description: "Egern 原生模块：自动抓取 GLaDOS 登录凭据，每天自动签到并在下午补签。首次安装后只需登录/刷新一次 glados.cloud。"
+author: "xiex5695-star"
+homepage: "https://glados.cloud"
+
+scriptings:
+  - http_request:
+      name: "GLaDOS 自动获取登录凭据"
+      match: "^https://glados\\.(cloud|rocks|network)/(api/|console)"
+      script_url: "https://raw.githubusercontent.com/xiex5695-star/egern-glados-checkin/main/glados-egern.js"
+      timeout: 10
+      body_required: false
+
+  - schedule:
+      name: "GLaDOS 每日签到"
+      cron: "15 7 * * *"
+      script_url: "https://raw.githubusercontent.com/xiex5695-star/egern-glados-checkin/main/glados-egern.js"
+      timeout: 30
+
+  - schedule:
+      name: "GLaDOS 下午补签"
+      cron: "15 15 * * *"
+      script_url: "https://raw.githubusercontent.com/xiex5695-star/egern-glados-checkin/main/glados-egern.js"
+      timeout: 30
+
+mitm:
+  hostnames:
+    includes:
+      - "glados.cloud"
+      - "glados.rocks"
+      - "glados.network"
