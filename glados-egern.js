@@ -1,6 +1,6 @@
 /*
  * GLaDOS Auto Check-in for Egern
- * Auto-capture login Cookie + scheduled check-in
+ * Auto-capture login Cookie + scheduled/manual check-in
  * Target: https://glados.cloud
  */
 
@@ -9,16 +9,14 @@ const STORAGE_ORIGIN = "glados.origin";
 const STORAGE_CAPTURED_AT = "glados.captured_at";
 
 export default async function (ctx) {
-  // Request script: capture current GLaDOS login Cookie.
+  // HTTP request mode: capture current GLaDOS login Cookie.
   if (ctx.request) {
     captureCookie(ctx);
     return;
   }
 
-  // Schedule script: perform check-in.
-  if (ctx.cron) {
-    await runCheckin(ctx);
-  }
+  // Any non-request invocation (schedule or generic/manual) performs check-in.
+  await runCheckin(ctx);
 }
 
 function captureCookie(ctx) {
