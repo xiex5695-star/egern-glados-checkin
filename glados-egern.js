@@ -83,12 +83,17 @@ async function runCheckin(ctx) {
 
     const message = String(result?.message || "").trim();
     const lower = message.toLowerCase();
+
+    const repeated =
+      lower.includes("repeat") ||
+      lower.includes("already") ||
+      lower.includes("today's observation logged") ||
+      lower.includes("return tomorrow");
+
     const normal =
       result?.code === 0 ||
       lower.includes("checkin! got") ||
-      lower.includes("checkin repeats") ||
-      lower.includes("today's observation logged") ||
-      lower.includes("already");
+      repeated;
 
     if (!normal) throw new Error(message || "GLaDOS 返回了未知签到结果");
 
@@ -107,8 +112,6 @@ async function runCheckin(ctx) {
     const email = status?.data?.email || before?.data?.email || "GLaDOS";
     let leftDays = status?.data?.leftDays ?? before?.data?.leftDays ?? "?";
     if (!Number.isNaN(Number(leftDays))) leftDays = Math.floor(Number(leftDays));
-
-    const repeated = lower.includes("repeat") || lower.includes("already");
 
     ctx.notify({
       title: repeated ? "GLaDOS 今日已签到 ☑️" : "GLaDOS 签到成功 ✅",
