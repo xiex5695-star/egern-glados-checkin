@@ -1,0 +1,10 @@
+#!name=7li7li 自动签到
+#!desc=自动获取登录凭据；支持手动运行；每天 12:07 自动签到
+#!author=xiex5695-star
+
+[Script]
+http-request ^https:\/\/store\.7li7li\.com\/ script-path=https://raw.githubusercontent.com/xiex5695-star/egern-glados-checkin/main/7li7li-loon.js, tag=7li7li 自动获取登录凭据, enable=true
+cron "7 12 * * *" script-path=https://raw.githubusercontent.com/xiex5695-star/egern-glados-checkin/main/7li7li-loon.js, timeout=30, tag=7li7li 手动/自动签到, enable=true
+
+[MITM]
+hostname = %APPEND% store.7li7li.com
