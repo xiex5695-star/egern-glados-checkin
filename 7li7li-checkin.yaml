@@ -1,0 +1,14 @@
+name: "7li7li 自动签到"
+description: "每天中午 12:07 运行 7li7li 签到任务"
+author: "xiex5695-star"
+icon: "checkmark.circle.fill"
+env_schema:
+  SESSION_TOKEN:
+    name: "SESSION_TOKEN"
+    description: "填写 7li7li 登录会话 Token"
+scriptings:
+  - schedule:
+      name: "7li7li 每日签到"
+      cron: "7 12 * * *"
+      script_url: "https://raw.githubusercontent.com/xiex5695-star/egern-glados-checkin/main/7li7li-checkin.js"
+      timeout: 60
