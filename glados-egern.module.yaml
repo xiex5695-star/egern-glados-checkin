@@ -1,5 +1,5 @@
 name: "GLaDOS 自动签到"
-description: "Egern 原生模块：自动抓取 GLaDOS 登录凭据，每天 00:05 自动签到，并在下午 15:15 补签。"
+description: "Egern 原生模块：自动抓取 GLaDOS 登录凭据，每天 00:22 自动签到，并在下午 15:15 补签。"
 author: "xiex5695-star"
 homepage: "https://glados.cloud"
 icon: "checkmark.seal.fill"
@@ -19,7 +19,7 @@ scriptings:
 
   - schedule:
       name: "GLaDOS 每日签到"
-      cron: "28 0 * * *"
+      cron: "22 0 * * *"
       script_url: "https://raw.githubusercontent.com/xiex5695-star/egern-glados-checkin/main/glados-egern.js"
       timeout: 30
 
