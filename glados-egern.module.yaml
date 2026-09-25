@@ -19,7 +19,7 @@ scriptings:
 
   - schedule:
       name: "GLaDOS 每日签到"
-      cron: "16 0 * * *"
+      cron: "28 0 * * *"
       script_url: "https://raw.githubusercontent.com/xiex5695-star/egern-glados-checkin/main/glados-egern.js"
       timeout: 30
 
